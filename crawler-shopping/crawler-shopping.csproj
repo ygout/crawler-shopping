@@ -82,6 +82,8 @@
     <Compile Include="src\DbConnection\ConnectionFactory.cs" />
     <Compile Include="src\DbConnection\IConnectionFactory.cs" />
     <Compile Include="src\Entities\Product.cs" />
+    <Compile Include="src\Scraper\IScraper.cs" />
+    <Compile Include="src\Scraper\SuperU\ScraperSuperU.cs" />
     <Compile Include="src\Repository\IProductRepository.cs" />
     <Compile Include="src\Repository\ProductRepository.cs" />
   </ItemGroup>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+
 using System.ComponentModel.DataAnnotations;
 
 namespace crawler_shopping.src.Entities
