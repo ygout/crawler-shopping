@@ -15,8 +15,25 @@ namespace crawler_shopping.src.Scraper.SuperU
             throw new NotImplementedException();
         }
 
+        public bool IsProductsHtml(HtmlDocument htmlDoc)
+        {
+            // contain this id search-result-items <ul id="search-result-items">
+            HtmlNodeCollection htmlProducts = htmlDoc.DocumentNode.SelectNodes("//ul[contains(@id,'search-result-items')]");
+            if (htmlProducts.Count() == 0)
+                return false;
+
+            return true;
+        }
+
         public Product ParseProduct(HtmlDocument htmlDoc)
         {
+            throw new NotImplementedException();
+        }
+
+        public List<Product> ParseProducts(HtmlDocument htmlDoc)
+        {
+            HtmlNodeCollection htmlProducts = htmlDoc.DocumentNode.SelectNodes("//ul[contains(@id,'search-result-items')]");
+            
             throw new NotImplementedException();
         }
     }

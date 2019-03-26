@@ -12,5 +12,7 @@ namespace crawler_shopping.src.Scraper
     {
         Product ParseProduct(HtmlDocument htmlDoc);
         bool IsProductHtml(HtmlDocument htmlDoc);
+        bool IsProductsHtml(HtmlDocument htmlDoc);
+        List<Product> ParseProducts(HtmlDocument htmlDoc);
     }
 }

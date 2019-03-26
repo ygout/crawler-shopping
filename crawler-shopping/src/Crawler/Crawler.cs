@@ -64,11 +64,10 @@ namespace crawler_shopping.src.Crawler
             //// TODO if is a product add to bdd
             ScraperSuperU scraperSuperU = new ScraperSuperU();
             ProductRepository productRepository = new ProductRepository(new ConnectionFactory());
-            Product product;
-            if (scraperSuperU.IsProductHtml(htmlDoc))
+      
+            if (scraperSuperU.IsProductsHtml(htmlDoc))
             {
-                product = scraperSuperU.ParseProduct(htmlDoc);
-                productRepository.Add(product);
+                productRepository.AddProducts(scraperSuperU.ParseProducts(htmlDoc));
             }
 
             return content;
