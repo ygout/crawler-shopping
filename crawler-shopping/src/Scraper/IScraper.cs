@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace crawler_shopping.src.Scraper
 {
-    internal interface Iscraper
+    internal interface IScraper
     {
         Product ParseProduct(HtmlDocument htmlDoc);
         bool IsProductHtml(HtmlDocument htmlDoc);

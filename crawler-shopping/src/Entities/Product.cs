@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace crawler_shopping.src.Entities
 {
-    class Product
+    public class Product
     {
         [Key]
         public long? Id { get; set; }

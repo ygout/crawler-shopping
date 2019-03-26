@@ -1,4 +1,5 @@
 ﻿using crawler_shopping.src.Crawler.Parser;
+using crawler_shopping.src.Scraper.SuperU;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,8 @@ namespace crawler_shopping.src.Crawler
         private readonly List<Task<string>> runningTasks = new List<Task<string>>();
         private readonly HttpClient client;
         private readonly int maxConcurrentDownload;
-        //private const string BaseUrl = "http://cask-marque.co.uk";
 
-        static List<string> urlsQueue = new List<string>();
+        static readonly List<string> urlsQueue = new List<string>();
 
         public Crawler(int maxConcurrentDownload)
         {
@@ -57,8 +57,14 @@ namespace crawler_shopping.src.Crawler
             HtmlDocument htmlDoc = parserHtml.LoadContent(content);
             // ExtracAllLinks
             CrawlList.AddUrls(parserHtml.ExtractAllLinks(htmlDoc));
-            
-            // TODO if is a product add to bdd
+
+            //// TODO if is a product add to bdd
+            //ScraperSuperU scraperSuperU = new ScraperSuperU();
+            //if(scraperSuperU.IsProductHtml(htmlDoc))
+            //{
+            //    scraperSuperU.IsProductHtml(htmlDoc);
+            //}
+
             return content;
         }
     }
