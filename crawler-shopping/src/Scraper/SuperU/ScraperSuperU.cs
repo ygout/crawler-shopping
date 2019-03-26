@@ -11,6 +11,11 @@ namespace crawler_shopping.src.Parser.SuperU
 {
     class ParserSuperU : Iscraper
     {
+        public bool IsProductHtml(HtmlDocument htmlDoc)
+        {
+            throw new NotImplementedException();
+        }
+
         public Product ParseProduct(HtmlDocument htmlDoc)
         {
             throw new NotImplementedException();

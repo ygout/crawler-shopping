@@ -79,6 +79,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Crawler\Crawler.cs" />
+    <Compile Include="src\Crawler\CrawlList.cs" />
+    <Compile Include="src\Crawler\Parser\ParserCrawl.cs" />
     <Compile Include="src\DbConnection\ConnectionFactory.cs" />
     <Compile Include="src\DbConnection\IConnectionFactory.cs" />
     <Compile Include="src\Entities\Product.cs" />

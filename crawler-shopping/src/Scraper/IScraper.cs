@@ -10,7 +10,7 @@ namespace crawler_shopping.src.Scraper
 {
     internal interface Iscraper
     {
-       Product ParseProduct(HtmlDocument htmlDoc);
-       bool IsProductHtml(HtmlDocument htmlDoc);
+        Product ParseProduct(HtmlDocument htmlDoc);
+        bool IsProductHtml(HtmlDocument htmlDoc);
     }
 }
