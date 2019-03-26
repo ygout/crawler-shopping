@@ -1,4 +1,7 @@
 ﻿using crawler_shopping.src.Crawler.Parser;
+using crawler_shopping.src.DbConnection;
+using crawler_shopping.src.Entities;
+using crawler_shopping.src.Repository;
 using crawler_shopping.src.Scraper.SuperU;
 using HtmlAgilityPack;
 using System;
@@ -59,11 +62,14 @@ namespace crawler_shopping.src.Crawler
             CrawlList.AddUrls(parserHtml.ExtractAllLinks(htmlDoc));
 
             //// TODO if is a product add to bdd
-            //ScraperSuperU scraperSuperU = new ScraperSuperU();
-            //if(scraperSuperU.IsProductHtml(htmlDoc))
-            //{
-            //    scraperSuperU.IsProductHtml(htmlDoc);
-            //}
+            ScraperSuperU scraperSuperU = new ScraperSuperU();
+            ProductRepository productRepository = new ProductRepository(new ConnectionFactory());
+            Product product;
+            if (scraperSuperU.IsProductHtml(htmlDoc))
+            {
+                product = scraperSuperU.ParseProduct(htmlDoc);
+                productRepository.Add(product);
+            }
 
             return content;
         }
