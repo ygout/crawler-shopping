@@ -17,18 +17,29 @@ namespace crawler_shopping.src.Crawler.Parser
         public List<string> ExtractAllLinks(HtmlDocument htmlDoc)
         {
             List<string> urls = new List<string>();
-
-            HtmlNodeCollection linksNode = htmlDoc.DocumentNode.SelectNodes("//a");
-
-            foreach (HtmlNode link in linksNode)
+            Console.WriteLine("Extrac all links");
+            try
             {
-                string linkHref = link.Attributes["href"].Value;
-                // don't add link's doublon
-                if (!urls.Contains(linkHref))
+                HtmlNodeCollection linksNode = htmlDoc.DocumentNode.SelectNodes("//a[@href]");
+                foreach (HtmlNode link in linksNode)
                 {
-                    urls.Add(linkHref);
+                    string linkHref = link.GetAttributeValue("href", string.Empty);
+                   
+                    // don't add link's doublon
+                    if (linkHref != string.Empty && !urls.Contains(linkHref))
+                    {
+                        Console.WriteLine($"Link {linkHref}");
+                        urls.Add(linkHref);
+                    }
                 }
             }
+            catch(Exception e)
+            {
+                Console.WriteLine($"Error => {e}");
+            }
+            
+            
+            //Console.WriteLine("Urls: [{0}]", string.Join(", ", urls));
             return urls;
         }
 
@@ -49,6 +60,7 @@ namespace crawler_shopping.src.Crawler.Parser
             {
                 Console.WriteLine($"Error parsing html {exception}");
             }
+            Console.WriteLine("Content html parser");
             return htmlDoc;
         }
     }
