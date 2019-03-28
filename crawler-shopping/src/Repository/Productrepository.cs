@@ -24,7 +24,7 @@ namespace crawler_shopping.src.Repository
 
         public bool AddProducts(List<Product> products)
         {
-            string querySql = "insert into product values (@Id, @Name, @Price, @UnitInfo, @Category, @ImageUrl)";
+            string querySql = "insert into product values (@Uid, @Name, @Price, @UnitInfo, @Category, @ImageUrl)";
 
             try
             {
@@ -41,7 +41,7 @@ namespace crawler_shopping.src.Repository
             return true;
         }
 
-        public bool Delete(int id)
+        public bool Delete(string uid)
         {
             throw new NotImplementedException();
         }
@@ -51,7 +51,7 @@ namespace crawler_shopping.src.Repository
             throw new NotImplementedException();
         }
 
-        public Product GetById(int id)
+        public Product GetByUid(string uid)
         {
             throw new NotImplementedException();
         }

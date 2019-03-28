@@ -9,10 +9,10 @@ namespace crawler_shopping.src.Repository
 {
     internal interface IProductRepository
     {
-        Product GetById(int id);
+        Product GetByUid(string uid);
         bool Add(Product product);
         bool Update(Product product);
-        bool Delete(int id);
+        bool Delete(string uid);
         bool AddProducts(List<Product> products);
         IEnumerable<Product> GetAll();
     }

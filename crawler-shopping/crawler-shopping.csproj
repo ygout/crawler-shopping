@@ -39,8 +39,8 @@
     <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.11.0\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.15\lib\net452\MySql.Data.dll</HintPath>
@@ -84,7 +84,10 @@
     <Compile Include="src\Crawler\Parser\ParserCrawl.cs" />
     <Compile Include="src\DbConnection\ConnectionFactory.cs" />
     <Compile Include="src\DbConnection\IConnectionFactory.cs" />
+    <Compile Include="src\Entities\Category.cs" />
     <Compile Include="src\Entities\Product.cs" />
+    <Compile Include="src\Repository\CategoryRepository.cs" />
+    <Compile Include="src\Repository\ICategoryRepository.cs" />
     <Compile Include="src\Scraper\IScraper.cs" />
     <Compile Include="src\Scraper\SuperU\ScraperSuperU.cs" />
     <Compile Include="src\Repository\IProductRepository.cs" />
@@ -94,6 +97,5 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
