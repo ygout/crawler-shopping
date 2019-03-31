@@ -38,39 +38,51 @@ namespace crawler_shopping.src.Crawler
             while (runningTasks.Any())
             {
                 Task<string> completedTask = await Task.WhenAny(runningTasks);
-                runningTasks.Remove(completedTask);
-                string pageHtml = await completedTask;
+                Console.WriteLine("Task completed");
+                Console.WriteLine($"Crawlist {CrawlList.urlsToCrawl.Count}");
+                Console.WriteLine($"urlsCompleted {CrawlList.urlsCompleted.Count}");
 
+                string pageHtml = await completedTask;
+                runningTasks.Remove(completedTask);
+                
                 while (CrawlList.HasNext() && runningTasks.Count < maxConcurrentDownload)
                 {
                     string url = CrawlList.GetNext();
                     runningTasks.Add(ProcessUrl(url));
                 }
             }
-
             return true;
         }
         private async Task<string> ProcessUrl(string url)
         {
             Console.WriteLine("url " + url);
-            HttpResponseMessage response = await client.GetAsync(url);
-            string content = await response.Content.ReadAsStringAsync();
-            // Convert to htmlDoc
-            ParserCrawl parserHtml = new ParserCrawl();
-            HtmlDocument htmlDoc = parserHtml.LoadContent(content);
-            // ExtracAllLinks
-            CrawlList.AddUrls(parserHtml.ExtractAllLinks(htmlDoc));
-
-            //// TODO if is a product add to bdd
-            ScraperSuperU scraperSuperU = new ScraperSuperU();
-            ProductRepository productRepository = new ProductRepository(new ConnectionFactory());
-      
-            if (scraperSuperU.IsProductsHtml(htmlDoc))
+            try
             {
-                productRepository.AddProducts(scraperSuperU.ParseProducts(htmlDoc));
-            }
+                HttpResponseMessage response = await client.GetAsync(url);
+                string content = await response.Content.ReadAsStringAsync();
+                // Convert to htmlDoc
+                ParserCrawl parserHtml = new ParserCrawl();
+                HtmlDocument htmlDoc = parserHtml.LoadContent(content);
+                // ExtracAllLinks
+                CrawlList.AddUrls(parserHtml.ExtractAllLinks(htmlDoc));
 
-            return content;
+                //// TODO if is a product add to bdd
+                ScraperSuperU scraperSuperU = new ScraperSuperU();
+                ProductRepository productRepository = new ProductRepository(new ConnectionFactory());
+                if (scraperSuperU.IsProductsHtml(htmlDoc))
+                {
+                    Console.WriteLine("Is a products");
+                    productRepository.AddProducts(scraperSuperU.ParseProducts(htmlDoc));
+                }
+                return content;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error process {ex}");
+                return String.Empty;
+            }
+           
+           
         }
     }
 }

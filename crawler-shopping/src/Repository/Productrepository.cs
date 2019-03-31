@@ -31,10 +31,11 @@ namespace crawler_shopping.src.Repository
                 IDbTransaction transaction = _connectionFactory.GetConnection.BeginTransaction();
                 _connectionFactory.GetConnection.Execute(querySql, products, transaction: transaction);
                 transaction.Commit();
+                Console.WriteLine("Products Added into BDD");
             }
             catch (Exception exception)
             {
-                Console.WriteLine($"Error => {exception}");
+                Console.WriteLine($"Error BDD => {exception}");
                 return false;
             }
 

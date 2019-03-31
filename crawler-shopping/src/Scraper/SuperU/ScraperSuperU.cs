@@ -21,12 +21,21 @@ namespace crawler_shopping.src.Scraper.SuperU
         public bool IsProductsHtml(HtmlDocument htmlDoc)
         {
             // contain this id search-result-items <ul id="search-result-items">
-            HtmlNodeCollection htmlProducts = htmlDoc.DocumentNode.SelectNodes("//ul[contains(@class,'search-result-items')]");
-            if (htmlProducts.Count() == 0)
-                return false;
+            try
+            {
+                HtmlNodeCollection htmlProducts = htmlDoc.DocumentNode.SelectNodes("//ul[contains(@class,'search-result-items')]");
+                if (htmlProducts.Count() == 0)
+                    return false;
 
-            Console.WriteLine("It's a Product page");
-            return true;
+                Console.WriteLine("It's a Product page");
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error is product html {ex}");
+                return false;
+            }
+           
         }
 
         public Product ParseProduct(HtmlDocument htmlDoc)

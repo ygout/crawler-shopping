@@ -17,7 +17,6 @@ namespace crawler_shopping.src.Crawler.Parser
         public List<string> ExtractAllLinks(HtmlDocument htmlDoc)
         {
             List<string> urls = new List<string>();
-            Console.WriteLine("Extrac all links");
             try
             {
                 HtmlNodeCollection linksNode = htmlDoc.DocumentNode.SelectNodes("//a[@href]");
@@ -27,8 +26,7 @@ namespace crawler_shopping.src.Crawler.Parser
                    
                     // don't add link's doublon
                     if (linkHref != string.Empty && !urls.Contains(linkHref))
-                    {
-                        Console.WriteLine($"Link {linkHref}");
+                     {
                         urls.Add(linkHref);
                     }
                 }

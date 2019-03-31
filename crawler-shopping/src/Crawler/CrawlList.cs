@@ -35,6 +35,7 @@ namespace crawler_shopping.src.Crawler
         /// <returns>string</returns>
         public string GetNext()
         {
+            urlsCompleted.Add(urlsToCrawl.Last());                  
             return urlsToCrawl.Dequeue();
         }
         /// <summary>

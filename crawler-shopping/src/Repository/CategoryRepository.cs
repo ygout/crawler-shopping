@@ -51,11 +51,11 @@ namespace crawler_shopping.src.Repository
 
         public Category GetByName(string name)
         {
-            string query = "SELECT * FROM category WHERE name = @name";
+            string query = "SELECT * FROM category WHERE category_name = @NameCategory";
 
             try
             {
-                Category category = _connectionFactory.GetConnection.QuerySingle<Category>(query, new { name = name });
+                Category category = _connectionFactory.GetConnection.QuerySingle<Category>(query, new { NameCategory = name});
                 return category;
             }
             catch (Exception exception)

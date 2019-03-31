@@ -97,5 +97,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="src\DbConnection\SqlDb\crawler-shopping_category.sql" />
+    <Content Include="src\DbConnection\SqlDb\crawler-shopping_product.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,7 +11,7 @@ namespace crawler_shopping
     {
         static void Main(string[] args)
         {
-            Crawler crawler = new Crawler(2);
+            Crawler crawler = new Crawler(5);
 
             try
             {
