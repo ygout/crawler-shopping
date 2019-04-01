@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace crawler_shopping.src.Scraper.SuperU
 {
@@ -24,7 +25,7 @@ namespace crawler_shopping.src.Scraper.SuperU
             try
             {
                 HtmlNodeCollection htmlProducts = htmlDoc.DocumentNode.SelectNodes("//ul[contains(@class,'search-result-items')]");
-                if (htmlProducts.Count() == 0)
+                if (htmlProducts == null ||  !htmlProducts.Any())
                     return false;
 
                 Console.WriteLine("It's a Product page");
@@ -42,13 +43,13 @@ namespace crawler_shopping.src.Scraper.SuperU
         {
             throw new NotImplementedException();
         }
-
+        
         public List<Product> ParseProducts(HtmlDocument htmlDoc)
         {
             List<Product> products = new List<Product>();
-            string categoryName = htmlDoc.DocumentNode
+            string categoryName = HttpUtility.HtmlDecode(htmlDoc.DocumentNode
                                     .SelectSingleNode("//h1[contains(@class,'banner-title banner-title--category')]")
-                                    .InnerText;
+                                    .InnerText);
 
             CategoryRepository categoryRepository = new CategoryRepository(new ConnectionFactory());
             
@@ -73,24 +74,24 @@ namespace crawler_shopping.src.Scraper.SuperU
 
             foreach (HtmlNode htmlProduct in htmlProducts)
             {
-                var name = htmlProduct.SelectSingleNode(".//h3[contains(@class,'product-name')]//a")
-                                        .InnerText;
+                var name = HttpUtility.HtmlDecode(htmlProduct.SelectSingleNode(".//h3[contains(@class,'product-name')]//a")
+                                        .InnerText);
 
-                var price = htmlProduct.SelectSingleNode(".//span[contains(@class,'sale-price')]")
+                var price = HttpUtility.HtmlDecode(htmlProduct.SelectSingleNode(".//span[contains(@class,'sale-price')]")
                                         .ChildAttributes("data-item-price")
                                         .FirstOrDefault()
-                                        .Value;
+                                        .Value);
 
-                var unitInfo = htmlProduct.SelectSingleNode(".//span[contains(@class,'unit-info')]")
-                                        .InnerText;
-                var imageUrl = htmlProduct.SelectSingleNode(".//div[contains(@class,'product-image')]")
+                var unitInfo = HttpUtility.HtmlDecode(htmlProduct.SelectSingleNode(".//span[contains(@class,'unit-info')]")
+                                        .InnerText);
+                var imageUrl = HttpUtility.HtmlDecode(htmlProduct.SelectSingleNode(".//div[contains(@class,'product-image')]")
                                         .Descendants("picture")
                                         .FirstOrDefault()
                                         .Descendants("img")
                                         .FirstOrDefault()
                                         .ChildAttributes("src")
                                         .FirstOrDefault()
-                                        .Value;
+                                        .Value);
 
                 Product product = new Product()
                 {

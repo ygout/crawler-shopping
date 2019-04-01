@@ -24,10 +24,12 @@ namespace crawler_shopping.src.Repository
             try
             {
                 _connectionFactory.GetConnection.Execute(querySql, category);
+                _connectionFactory.GetConnection.Close();
             }
             catch (Exception exception)
             {
                 Console.WriteLine($"Error => {exception}");
+                _connectionFactory.GetConnection.Close();
                 return false;
             }
 
@@ -56,11 +58,13 @@ namespace crawler_shopping.src.Repository
             try
             {
                 Category category = _connectionFactory.GetConnection.QuerySingle<Category>(query, new { NameCategory = name});
+                _connectionFactory.GetConnection.Close();
                 return category;
             }
             catch (Exception exception)
             {
                 Console.WriteLine($"Error => {exception}");
+                _connectionFactory.GetConnection.Close();
                 return null;
             }
 
